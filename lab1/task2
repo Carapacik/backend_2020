@@ -1,0 +1,21 @@
+http://localhost/lw1/mysql_is_a_database_server.html
+Status Code: 404 Not Found
+Что означает - файл не существует на сервере
+тип - ошибка
+Решение - добавить файл в данную директорию
+
+http://localhost/lw1/nginx_is_fast_http_server.txt
+Status Code: 200 ОК
+Что означает - успешный запрос
+Тип - специальное поведение
+
+http://localhost/lw1/php_is_a_server_scripting_language.php
+Status Code: 302 Found
+Что означает - запрошенный ресурс был временно перемещен по адресу, указанному в заголовке; перенаправление
+Тип - специальное поведение
+
+http://localhost/lw1/javascript_is_a_client_side_language.php?how_to_work=hardly
+Status Code: 400 Bad Request
+Что означает - неправильный запрос
+Тип - ошибка
+Решение - изменить запрос (http://localhost/lw1/javascript_is_a_client_side_language.php?how_to_work=hard)
