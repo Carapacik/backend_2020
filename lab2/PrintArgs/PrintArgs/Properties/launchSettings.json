@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "PrintArgs": {
+      "commandName": "Project",
+      "commandLineArgs": "Hello Wrls 1! !"
+    }
+  }
+}

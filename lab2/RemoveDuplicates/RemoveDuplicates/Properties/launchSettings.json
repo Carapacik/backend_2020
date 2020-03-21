@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "RemoveDuplicates": {
+      "commandName": "Project",
+      "commandLineArgs": "HelloWorlde!!"
+    }
+  }
+}
