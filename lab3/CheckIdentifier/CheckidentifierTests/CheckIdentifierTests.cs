@@ -7,121 +7,121 @@ namespace CheckidentifierTests
     public class CheckIdentifierTests
     {
         [TestMethod]
-        public void CheckIdentifierTests_IncorrectSymbol()
+        public void CheckIdentifier_EmptyString_ReturnFalse()
         {
             // Act
-            string[] wrongStr = new string[1]{ "Silens!" };
-
-            int endValue = Program.Main(wrongStr);
+            string str = "";
+            int result  = Program.CheckIdentifier(str);
 
             // Assert
-            Assert.AreEqual(1, endValue);
-
+            Assert.AreEqual(1, result);
         }
 
         [TestMethod]
-        public void CheckIdentifierTests_IncorrectArgumentsCount()
+        public void CheckIdentifier_StartingWithDigit_ReturnFalse()
         {
             // Act
-            string[] wrongStr = new string[2] { "Privet", "Alo" };
-
-            int endValue = Program.Main(wrongStr);
+            string str = "0Alo";
+            int result = Program.CheckIdentifier(str);
 
             // Assert
-            Assert.AreEqual(1, endValue);
+            Assert.AreEqual(1, result);
         }
 
         [TestMethod]
-        public void CheckIdentifierTests_StartWithDigit()
+        public void CheckIdentifier_StringWithIncorrectSymbol_ReturnFalse()
         {
             // Act
-            string[] wrongStr = new string[1] { "1Begin" };
-
-            int endValue = Program.Main(wrongStr);
+            string str = "Alo[";
+            int result = Program.CheckIdentifier(str);
 
             // Assert
-            Assert.AreEqual(1, endValue);
+            Assert.AreEqual(1, result);
         }
 
         [TestMethod]
-        public void CheckIdentifierTests_InputIsEmptyString()
+        public void CheckIdentifier_CorrectString_ReturnTrue()
         {
             // Act
-            string[] wrongStr = new string[1] {""};
-
-            int endValue = Program.Main(wrongStr);
+            string str = "End11";
+            int result = Program.CheckIdentifier(str);
 
             // Assert
-            Assert.AreEqual(1, endValue);
+            Assert.AreEqual(0, result);
+        }
+    }
+
+    [TestClass]
+    public class IsSymbolLetterOrDigitTests
+    {
+        [TestMethod]
+        public void IsSymbolLetterOrDigit_EmptyString_ReturnTrue()
+        {
+            // Act
+            string str = "";
+            bool result = Program.IsSymbolLetterOrDigit(str);
+
+            // Assert
+            Assert.IsTrue(result);
         }
 
         [TestMethod]
-        public void CheckIdentifierTests_EmptyInput()
+        public void IsSymbolLetterOrDigit_IncorrectSymbolInString_ReturnFalse()
         {
             // Act
-            string[] wrongStr = new string[0] {};
-
-            int endValue = Program.Main(wrongStr);
+            string str = "lala&lola";
+            bool result = Program.IsSymbolLetterOrDigit(str);
 
             // Assert
-            Assert.AreEqual(1, endValue);
+            Assert.IsFalse(result);
         }
 
         [TestMethod]
-        public void CheckIdentifierTests_CorrectInput()
+        public void IsSymbolLetterOrDigit_CorrectSymbols_ReturnTrue()
         {
             // Act
-            string[] correctStr = new string[1] { "Begin" };
-
-            int endValue = Program.Main(correctStr);
+            string str = "False";
+            bool result = Program.IsSymbolLetterOrDigit(str);
 
             // Assert
-            Assert.AreEqual(0, endValue);
+            Assert.IsTrue(result);
+        }
+    }
+
+    [TestClass]
+    public class IsLetterTests
+    {
+        [TestMethod]
+        public void IsLetter_EnglishLetterInUpperCase_ReturnTrue()
+        {
+            // Act
+            char letter = 'S';
+            bool result = Program.IsLetter(letter);
+
+            // Assert
+            Assert.IsTrue(result);
         }
 
         [TestMethod]
-        public void IsNumber_Number_ReturnTrue()
+        public void IsLetter_EnglishLetterInLowerCase_ReturnTrue()
         {
             // Act
-            char number = '1';
-            bool resresult = CheckIdentifier.Program.IsNumber(number);
+            char letter = 's';
+            bool result = Program.IsLetter(letter);
 
             // Assert
-            Assert.AreEqual(true, resresult);
+            Assert.IsTrue(result);
         }
 
         [TestMethod]
-        public void IsNumber_NotNumber_ReturnTrue()
+        public void IsLetter_Digit_ReturnFalse()
         {
             // Act
-            char notnumber = '[';
-            bool resresult = CheckIdentifier.Program.IsNumber(notnumber);
+            char notletter = '2';
+            bool result = Program.IsLetter(notletter);
 
             // Assert
-            Assert.AreEqual(false, resresult);
-        }
-
-        [TestMethod]
-        public void IsLetter_WithLetterUpperCase_ReturnTrue()
-        {
-            // Act
-            char letter = 'B';
-            bool resresult = CheckIdentifier.Program.IsLetter(letter);
-
-            // Assert
-            Assert.AreEqual(true, resresult);
-        }
-
-
-        [TestMethod]
-        public void IsLetter_WithLetterLowerCase_ReturnTrue()
-        {
-            // Act
-            char letter = 'c';
-            bool resresult = CheckIdentifier.Program.IsLetter(letter);
-
-            // Assert
-            Assert.AreEqual(true, resresult);
+            Assert.IsFalse(result);
         }
 
         [TestMethod]
@@ -129,10 +129,53 @@ namespace CheckidentifierTests
         {
             // Act
             char notletter = '[';
-            bool resresult = CheckIdentifier.Program.IsLetter(notletter);
+            bool result = Program.IsLetter(notletter);
 
             // Assert
-            Assert.AreEqual(false, resresult);
+            Assert.IsFalse(result);
+        }
+    }
+
+    [TestClass]
+    public class ParseArgsTests
+    {
+        [TestMethod]
+        public void ParseArgs_EmptyInput_ReturnFalse()
+        {            
+            // Act
+            string[] args = new string[] { };
+            string inputStr = "";
+
+            bool endValue = Program.ParseArgs(args, ref inputStr);
+
+            // Assert
+            Assert.IsFalse(endValue);
+        }
+
+        [TestMethod]
+        public void ParseArgs_IncorrectArgumentsInInput_ReturnFalse()
+        {
+            // Act
+            string[] args = new string[2] { "Alo", "Privet" };
+            string inputStr = "";
+
+            bool endValue = Program.ParseArgs(args, ref inputStr);
+
+            // Assert
+            Assert.IsFalse(endValue);
+        }
+
+        [TestMethod]
+        public void ParseArgs_CorrectInput_ReturnTrue()
+        {
+            // Act
+            string[] args = new string[] { "Begin" };
+            string inputStr = "";
+
+            bool endValue = Program.ParseArgs(args, ref inputStr);
+
+            // Assert
+            Assert.IsTrue(endValue);
         }
     }
 }

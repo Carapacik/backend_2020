@@ -4,62 +4,75 @@ namespace CheckIdentifier
 {
     public class Program
     {
-        public static int Main(string[] args)
+        public static bool ParseArgs(string[] args, ref string inputStr)
         {
             if (args.Length != 1)
             {
+                Console.WriteLine("no");
                 Console.WriteLine("Incorrect arguments count");
+                Console.WriteLine("Usage CheckIdentifier.exe <input string>");
+                return false;
+            }
+            inputStr = args[0];
+            return true;
+        }
 
+        public static bool IsLetter(char character)
+        {
+            if ((character >= 'A') && (character <= 'Z') || (character >= 'a') && (character <= 'z'))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public static bool IsSymbolLetterOrDigit(string inputStr)
+        {
+            for (int i = 0; i < inputStr.Length; i++)
+            {
+                if (!(IsLetter(inputStr[i]) || char.IsDigit(inputStr[i])))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public static int CheckIdentifier(string inputStr)
+        {
+            if (inputStr == "")
+            {
+                Console.WriteLine("no");
+                Console.WriteLine("The identifier can't be an empty string");
                 return 1;
             }
-            else
+            if (!IsLetter(inputStr[0]))
             {
-                string inputStr = args[0];
-                if (inputStr.Length > 0)
-                {
-                    if (!IsNumber(inputStr[0]))
-                    {
-                        for (int i = 0; i < inputStr.Length; i++)
-                        {
-                            if (!IsNumber(inputStr[i]) && !IsLetter(inputStr[i]))
-                            {
-                                Console.WriteLine("No");
-                                Console.WriteLine("The identifier must contain only numbers or letters.");
-
-                                return 1;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine("No");
-                        Console.WriteLine("Identifier can't start with a digit.");
-
-                        return 1;
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("No");
-                    Console.WriteLine("An empty string was passed.");
-
-                    return 1;
-                }
-
+                Console.WriteLine("no");
+                Console.WriteLine("Identifier can't start with a digit.");
+                return 1;
+            }
+            if (!IsSymbolLetterOrDigit(inputStr.Substring(1)))
+            {
+                Console.WriteLine("no");
+                Console.WriteLine("The identifier must contain only numbers or letters.");
+                return 1;
             }
             Console.WriteLine("yes");
-
             return 0;
         }
 
-        public static bool IsNumber(char symbol)
+        public static int Main(string[] args)
         {
-            return symbol >= '0' && symbol <= '9';
-        }
+            string inputStr = "";
+            if (!ParseArgs(args, ref inputStr))
+            {
+                return 1;
+            }
 
-        public static bool IsLetter(char symbol)
-        {
-            return (symbol >= 'A' && symbol <= 'Z') || (symbol >= 'a' && symbol <= 'z');
+            CheckIdentifier(inputStr);
+
+            return 0;
         }
     }
 }
