@@ -89,47 +89,47 @@ namespace CheckidentifierTests
     }
 
     [TestClass]
-    public class IsLetterTests
+    public class IsEnglishLetterTests
     {
         [TestMethod]
-        public void IsLetter_EnglishLetterInUpperCase_ReturnTrue()
+        public void IsEnglishLetter_EnglishLetterInUpperCase_ReturnTrue()
         {
             // Act
             char letter = 'S';
-            bool result = Program.IsLetter(letter);
+            bool result = Program.IsEnglishLetter(letter);
 
             // Assert
             Assert.IsTrue(result);
         }
 
         [TestMethod]
-        public void IsLetter_EnglishLetterInLowerCase_ReturnTrue()
+        public void IsEnglishLetter_EnglishLetterInLowerCase_ReturnTrue()
         {
             // Act
             char letter = 's';
-            bool result = Program.IsLetter(letter);
+            bool result = Program.IsEnglishLetter(letter);
 
             // Assert
             Assert.IsTrue(result);
         }
 
         [TestMethod]
-        public void IsLetter_Digit_ReturnFalse()
+        public void IsEnglishLetter_Digit_ReturnFalse()
         {
             // Act
             char notletter = '2';
-            bool result = Program.IsLetter(notletter);
+            bool result = Program.IsEnglishLetter(notletter);
 
             // Assert
             Assert.IsFalse(result);
         }
 
         [TestMethod]
-        public void IsLetter_WithNotLetter_ReturnFalse()
+        public void IsEnglishLetter_WithNotLetter_ReturnFalse()
         {
             // Act
             char notletter = '[';
-            bool result = Program.IsLetter(notletter);
+            bool result = Program.IsEnglishLetter(notletter);
 
             // Assert
             Assert.IsFalse(result);

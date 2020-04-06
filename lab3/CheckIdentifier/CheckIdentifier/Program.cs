@@ -2,7 +2,7 @@
 
 namespace CheckIdentifier
 {
-    public class Program
+    public static class Program
     {
         public static bool ParseArgs(string[] args, ref string inputStr)
         {
@@ -17,16 +17,16 @@ namespace CheckIdentifier
             return true;
         }
 
-        public static bool IsLetter(char character)
+        public static bool IsEnglishLetter(char character)
         {
-			return (character >= 'A') && (character <= 'Z') || (character >= 'a') && (character <= 'z');
+            return (character >= 'A') && (character <= 'Z') || (character >= 'a') && (character <= 'z');
         }
 
         public static bool IsSymbolLetterOrDigit(string inputStr)
         {
             for (int i = 0; i < inputStr.Length; i++)
             {
-                if (!(IsLetter(inputStr[i]) || char.IsDigit(inputStr[i])))
+                if (!(IsEnglishLetter(inputStr[i]) || char.IsDigit(inputStr[i])))
                 {
                     return false;
                 }
@@ -42,7 +42,7 @@ namespace CheckIdentifier
                 Console.WriteLine("The identifier can't be an empty string");
                 return 1;
             }
-            if (!IsLetter(inputStr[0]))
+            if (!IsEnglishLetter(inputStr[0]))
             {
                 Console.WriteLine("no");
                 Console.WriteLine("Identifier can't start with a digit.");
