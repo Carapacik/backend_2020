@@ -19,11 +19,7 @@ namespace CheckIdentifier
 
         public static bool IsLetter(char character)
         {
-            if ((character >= 'A') && (character <= 'Z') || (character >= 'a') && (character <= 'z'))
-            {
-                return true;
-            }
-            return false;
+			return (character >= 'A') && (character <= 'Z') || (character >= 'a') && (character <= 'z');
         }
 
         public static bool IsSymbolLetterOrDigit(string inputStr)
