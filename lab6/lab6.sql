@@ -53,7 +53,7 @@ VALUES
 -- Напишите SQL-запрос, возвращающий все пары (download_count, user_count), удовлетворяющие следующему условию: 
 --  user_count — общее ненулевое число пользователей, сделавших ровно download_count скачиваний 19 ноября 2010 года
 
-SELECT DISTINCT "download_count", COUNT(*) AS user_count 
+SELECT "download_count", COUNT(*) AS user_count 
 FROM( 
     SELECT COUNT(*) AS download_count  
     FROM track_downloads 
@@ -152,7 +152,31 @@ WHERE
 
 --6 Как удалить повторяющиеся строки с использованием ключевого слова Distinct?
 
---??
+CREATE TABLE members(
+	"id_members"	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	"first_name" TEXT NOT NULL,
+	"status" INTEGER NOT NULL
+);
+
+INSERT INTO members ("first_name", "status")
+VALUES
+	('Алекс', 3),
+	('Мария', 10),
+	('Дмитрий', 2),
+	('Харитон', 2),
+	('Евгений', 2),
+	('Евгений', 2),
+	('Алекс', 3);
+	
+SELECT 
+	status,
+	first_name
+FROM members
+ORDER BY status;
+
+SELECT DISTINCT status, first_name
+FROM members
+ORDER BY status;
 
 --7 Есть две таблицы:
 --  users - таблица с пользователями (users_id, name)
